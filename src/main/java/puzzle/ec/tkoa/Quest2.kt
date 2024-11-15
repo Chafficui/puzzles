@@ -24,7 +24,6 @@ class Quest2: BaseSolution() {
     private fun solvePart2(input: List<String>) = input.drop(2).sumOf { line ->
         line.split(" ").sumOf { word ->
             input[0].replace("WORDS:", "").split(",").sumOf { runicWord ->
-                if (word.containsBothDirections(runicWord) > 0) println("$word $runicWord ${word.containsBothDirections(runicWord)} = ${runicWord.length * word.containsBothDirections(runicWord)}")
                 runicWord.length * word.containsBothDirections(runicWord)
             }
         }
