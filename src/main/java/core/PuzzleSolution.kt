@@ -2,7 +2,7 @@ package core
 
 interface PuzzleSolution {
     val day: Int
-    val puzzle: String
+    val puzzle: Puzzle
     val origin: PuzzleOrigin
 
     fun getParts(): List<PuzzlePart>

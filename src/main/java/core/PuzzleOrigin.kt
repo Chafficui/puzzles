@@ -4,8 +4,13 @@ enum class PuzzleOrigin {
     ADVENT_OF_CODE,
     EVERYBODY_CODES;
 
-    fun getDefaultPartsCount(): Int = when (this) {
-        ADVENT_OF_CODE -> 2
-        EVERYBODY_CODES -> 3
+    fun getLongName(): String = when (this) {
+        ADVENT_OF_CODE -> "Advent of Code"
+        EVERYBODY_CODES -> "Everybody Codes"
+    }
+
+    fun getShortName(): String = when (this) {
+        ADVENT_OF_CODE -> "aoc"
+        EVERYBODY_CODES -> "ec"
     }
 }

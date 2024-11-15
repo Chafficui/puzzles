@@ -1,11 +1,12 @@
 package puzzle.ec.tkoa
 
 import core.BaseSolution
+import core.Puzzle
 import core.PuzzleOrigin
 import core.PuzzlePart
 
 class Quest1() : BaseSolution() {
-    override val puzzle = "The Kingdom of Algorithmia"
+    override val puzzle = Puzzle.THE_KINGDOM_OF_ALGORITHMIA
     override val day = 1
     override val origin = PuzzleOrigin.EVERYBODY_CODES
     override fun getParts(): List<PuzzlePart> {

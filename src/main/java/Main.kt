@@ -1,3 +1,4 @@
+import core.Puzzle
 import core.PuzzleRunner
 import puzzle.ec.tkoa.Quest1
 import puzzle.ec.tkoa.Quest2
@@ -20,31 +21,41 @@ fun generateREADME() {
         append("# Kotlin Solutions by Felix Beinßen\n\n")
         append("This is my collection of solutions to coding puzzles from various sources. The solutions are written in Kotlin and are tested against the provided test cases. They are no where near perfect, but they work for the given input.\n\n")
 
+
         solutions.groupBy { it.origin }.forEach { (origin, originSolutions) ->
-            append("## $origin\n\n")
+            append("## ${origin.getLongName()}\n\n")
 
-            originSolutions.groupBy { it.puzzle }.toSortedMap().forEach { (year, yearSolutions) ->
-                append("### $year\n\n")
+            // Create header with all puzzles
+            val allPuzzles = Puzzle.entries.toTypedArray()
+            append("|Day|")
+            append(allPuzzles.joinToString("|") { it.getLongName() })
+            append("|\n")
 
-                val partCount = yearSolutions.first().getParts().size
-                append((1..partCount).joinToString("|", prefix = "|Day|", postfix = "|\n") { "Part $it" })
-                append((1..partCount).joinToString("|", prefix = "|---|", postfix = "|\n") { "---" })
+            // Separator line
+            append("|---|")
+            append(allPuzzles.joinToString("|") { "---" })
+            append("|\n")
 
-                yearSolutions.groupBy { it.day }
-                    .toSortedMap()
-                    .forEach { (day, daySolutions) ->
-                        val solution = daySolutions.first()
+            // Get all implemented days
+            val implementedSolutions = originSolutions.groupBy { it.day to it.puzzle }
+
+            // For each possible day (1 to max day count among all puzzles)
+            (1..allPuzzles.maxOf { it.getDayCount() }).forEach { day ->
+                append("|$day|")
+                append(allPuzzles.joinToString("|") { puzzle ->
+                    val solution = implementedSolutions[day to puzzle]?.firstOrNull()
+                    if (solution != null) {
                         val packagePath = solution::class.qualifiedName?.substringBeforeLast('.')
                         val className = solution::class.simpleName
-
-                        append("|$day|")
-                        append(solution.getParts().joinToString("|") { part ->
-                            "[Solution](src/main/java/${packagePath?.replace('.', '/')}/$className.kt)"
-                        })
-                        append("|\n")
+                        val filePath = "src/main/java/${packagePath?.replace('.', '/')}/$className.kt"
+                        "[✅]($filePath)"
+                    } else {
+                        "❌"
                     }
-                append("\n")
+                })
+                append("|\n")
             }
+            append("\n")
         }
     }
 

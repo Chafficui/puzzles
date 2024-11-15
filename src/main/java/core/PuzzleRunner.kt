@@ -43,11 +43,8 @@ class PuzzleRunner {
     }
 
     private fun getDefaultInputFile(solution: PuzzleSolution, part: Int): File {
-        val baseDir = when (solution.origin) {
-            PuzzleOrigin.ADVENT_OF_CODE -> "aoc"
-            PuzzleOrigin.EVERYBODY_CODES -> "ec"
-        }
+        val baseDir = solution.origin.getShortName()
 
-        return File("src/main/resources/$baseDir/${solution.puzzle}/day${solution.day.toString().padStart(2, '0')}-${part}.txt")
+        return File("src/main/resources/$baseDir/${solution.puzzle.getShortName()}/day${solution.day.toString().padStart(2, '0')}-${part}.txt")
     }
 }
