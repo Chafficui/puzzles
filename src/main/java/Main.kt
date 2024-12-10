@@ -1,12 +1,18 @@
 import core.Puzzle
 import core.PuzzleRunner
+import puzzle.aoc.y2024.Day1
+import puzzle.aoc.y2024.Day2
+import puzzle.aoc.y2024.Day3
 import puzzle.ec.tkoa.Quest1
 import puzzle.ec.tkoa.Quest2
 import java.io.File
 
 val solutions = listOf(
     Quest1(),
-    Quest2()
+    Quest2(),
+    Day1(),
+    Day2(),
+    Day3(),
 )
 
 fun main() {
